@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, validate } = require("../models/user");
+const { Admin, validate } = require("../models/admin");
 const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 
-		const user = await User.findOne({ email: req.body.email });
+		const user = await Admin.findOne({ email: req.body.email });
 		if (user)
 			return res
 				.status(409)
@@ -17,22 +17,11 @@ router.post("/", async (req, res) => {
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-		await new User({ ...req.body, password: hashPassword }).save();
+		await new Admin({ ...req.body, password: hashPassword }).save();
 		res.status(201).send({ message: "User created successfully" });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
 });
-router.get("/", async (req, res, next) => {
-	try {
-	  // Retrieve all contacts from the database
-	  const allContacts = await User.find();
-  
-	  res.status(200).send(allContacts);
-	} catch (error) {
-	  next(error); // Pass the error to the error handling middleware
-	}
-  });
-  
 
 module.exports = router;

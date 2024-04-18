@@ -1,29 +1,21 @@
 const mongoose = require('mongoose');
-
-const addressSchema = new mongoose.Schema({
-  addressLine1: String,
-  addressLine2: String,
-  state: String,
-  district: String,
-  pincode: String
-});
-
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
+  tournament:String,
   fideId: String,
   rating: String,
   gender: String,
-  dob: {
-    date: Number,
-    month: Number,
-    year: Number
-  },
+  dob: String,
   parentName: String,
   institute: String,
   mobileNumber: String,
   alternateMobileNumber: String,
-  address: addressSchema,
+  addressLine1: String,
+  addressLine2: String,
+  state: String,
+  district: String,
+  pincode: String,
   aicfId: String,
   entryFee: Number,
   finalAmount: Number

@@ -36,5 +36,15 @@ router.post("/", async (req, res, next) => {
     next(error); // Pass the error to the error handling middleware
   }
 });
+router.get("/", async (req, res, next) => {
+  try {
+    // Retrieve all contacts from the database
+    const allContacts = await contact.find();
+
+    res.status(200).send(allContacts);
+  } catch (error) {
+    next(error); // Pass the error to the error handling middleware
+  }
+});
 
 module.exports = router;

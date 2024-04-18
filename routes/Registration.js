@@ -15,15 +15,14 @@ router.post('/', async (req, res) => {
 });
 
 // Fetch User by Email Endpoint
-router.get('/user/:email', async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
-    const user = await regis.findOne({ email: req.params.email });
-    if (!user) {
-      return res.status(404).send('User not found');
-    }
-    res.status(200).json(user);
+    // Retrieve all contacts from the database
+    const allContacts = await regis.find();
+
+    res.status(200).send(allContacts);
   } catch (error) {
-    res.status(500).send('Internal Server Error');
+    next(error); // Pass the error to the error handling middleware
   }
 });
 
