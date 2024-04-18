@@ -16,7 +16,7 @@ connection();
 // middlewares
 app.use(express.json());
 app.use(cors({
-    origin: 'https://anand-chess-academy-front-en-git-5c46af-saradharameshs-projects.vercel.app'
+    origin: 'https://anand-chess-academy-front-en-git-5c46af-saradharameshs-projects.vercel.app/'
   }));
 
 // routes
