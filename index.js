@@ -26,6 +26,6 @@ app.use("/api/contact",contactRoutes);
 app.use("/api/register",regis);
 app.use("/api/course",courseRoutes);
 const port = process.env.PORT || 8080;
-app.listen(port,()=>{
+app.listen(port,'0.0.0.0',()=>{
     console.log(`Listening on port ${port}...`)
 });
